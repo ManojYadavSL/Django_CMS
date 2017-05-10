@@ -93,6 +93,15 @@ def get_public_languages(site_id=None):
     return [lang['code'] for lang in get_language_objects(site_id)
             if lang.get('public', True)]
 
+def get_visible_languages(request, site_id=None):
+    """
+    :return: list of iso2codes of languages visible for requset user
+    """
+    if hasattr(request, 'user') and request.user.is_staff:
+        return get_language_list()
+    else:
+        return get_public_languages()
+
 
 def get_language_object(language_code, site_id=None):
     """
@@ -178,3 +187,19 @@ def is_language_prefix_patterns_used():
     """
     return any(isinstance(url_pattern, LocaleRegexURLResolver)
                for url_pattern in get_resolver(None).url_patterns)
+
+
+def complete_i18n_url(url, language_code):
+    """
+    Adds the language prefix if it is required and missing
+    :param url:
+    :param language_code:
+    :return: URL
+    """
+    if (
+        is_language_prefix_patterns_used()
+        and url[0] == "/"
+        and not url.startswith('/%s/' % language_code)
+    ):
+        url = "/%s/%s" % (language_code, url.lstrip("/"))
+    return url
