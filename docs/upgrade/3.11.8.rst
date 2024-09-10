@@ -1,7 +1,7 @@
 .. _upgrade-to-3.11.8:
 
 ####################
-Release notes 3.11.7
+Release notes 3.11.8
 ####################
 
 ********************
@@ -11,7 +11,6 @@ What's new in 3.11.8
 Features:
 ---------
 * Improved permission performance for Django CMS 3 by @fsbraun in https://github.com/django-cms/django-cms/pull/7987
-
 
 Bug Fixes:
 ----------
@@ -38,7 +37,7 @@ Thanks to all contributors for their efforts!
 How to upgrade to 3.11.8
 ************************
 
-We assume you are upgrading from django CMS 3.11.7.
+We assume you are upgrading from django CMS 3.11.6 (or 3.11.7).
 
 Please make sure that your current database is consistent and in a healthy
 state, and **make a copy of the database before proceeding further.**
